@@ -6,5 +6,16 @@ import net.benji.LibraryItem;
  *  Denna klass kan användas för att representera magasin i bibliotekssystemet.
  */
 public class Magazine extends LibraryItem {
+    private int issueNumber;
+    private String category;
+    private int publicationYear;
+    
+    public Magazine(String title, String id, boolean isAvailable, int issueNumber, String category, int publicationYear) {
+        super(title, id, isAvailable);
+        this.issueNumber = issueNumber;
+        this.category = category;
+        this.publicationYear = publicationYear;
+    }
+
     
 }
