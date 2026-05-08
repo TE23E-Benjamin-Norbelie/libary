@@ -16,4 +16,9 @@ public class Book extends LibraryItem {
         this.genre = genre;
         this.pages = pages;
     }
+
+    public String ToString() {
+        return "Titel: " + getTitle() + ", Författare: " + author + ", Genre: " + genre + ", sidor: " + pages +
+         ", Tillgänglig: " + isAvailable();
+    }
 }
