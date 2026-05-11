@@ -51,6 +51,7 @@ private String serverUrl;
 
                 // Konvertera JSON-strängen till en lista av Magazine-objekt
                 List<Magazine> fetchedMagazines = gson.fromJson(jsonBody, new TypeToken<List<Magazine>>(){}.getType());
+                magazines.addAll(fetchedMagazines);
 
             } catch (UnirestException e) {
                 IO.println("Något blev fel vid inläsning.");
