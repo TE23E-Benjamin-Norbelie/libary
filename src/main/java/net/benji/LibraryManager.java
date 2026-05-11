@@ -36,7 +36,7 @@ private String serverUrl;
                 // Konvertera JSON-strängen till en lista av Book-objekt
                 List<Book> fetchedBooks = gson.fromJson(jsonBody, new TypeToken<List<Book>>(){}.getType());
                 books.addAll(fetchedBooks);
-                
+                IO.println("Hämtat information om Böcker");
 
             } catch (UnirestException e) {
                 IO.println("Något blev fel vid inläsning.");
@@ -52,6 +52,7 @@ private String serverUrl;
                 // Konvertera JSON-strängen till en lista av Magazine-objekt
                 List<Magazine> fetchedMagazines = gson.fromJson(jsonBody, new TypeToken<List<Magazine>>(){}.getType());
                 magazines.addAll(fetchedMagazines);
+                IO.println("Hämtat information om Magazinen");
 
             } catch (UnirestException e) {
                 IO.println("Något blev fel vid inläsning.");
@@ -59,6 +60,13 @@ private String serverUrl;
         }
 
         public void listLibraryItems() {
+            IO.println("Bibliotekobjekt:");
+            for (Book book: books) {
+                IO.println(book.toString());
+            }
+            for (Magazine magazine: magazines){
+                IO.println(magazine.toString());
+            }
             
         }
         public void addLibraryItem(LibraryItem item) {
