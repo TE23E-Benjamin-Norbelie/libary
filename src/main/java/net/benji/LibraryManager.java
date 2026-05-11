@@ -71,10 +71,11 @@ private String serverUrl;
             }
             
         }
-        public void addLibraryItem(LibraryItem item) {
-            
+        public void addBook(Book book) {
+            books.add(book);
         }
-        public void removeLibraryItem(LibraryItem item) {
+        public void addMagazine(Magazine magazine) {
+            magazines.add(magazine);
             
         }
 
