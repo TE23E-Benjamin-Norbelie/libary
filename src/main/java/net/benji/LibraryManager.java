@@ -26,6 +26,8 @@ private String serverUrl;
 
         public LibraryManager(String serverUrl) {
                 this.serverUrl = serverUrl; 
+                this.books = new ArrayList<>();// Initiera listan för böcker
+                this.magazines = new ArrayList<>();// Initiera listan för magasin
         }
         public void fetchBooks() {
             HttpResponse<String> response;
