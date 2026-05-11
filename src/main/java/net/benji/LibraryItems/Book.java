@@ -17,8 +17,12 @@ public class Book extends LibraryItem {
         this.pages = pages;
     }
 
-    public String ToString() {
-        return "Titel: " + getTitle() + ", Författare: " + author + ", Genre: " + genre + ", sidor: " + pages +
-         ", Tillgänglig: " + isAvailable();
-    }
+@Override
+public String toString() {
+    return "Titel: " + getTitle() + "\n" +
+           "Författare: " + author + "\n" +
+           "Genre: " + genre + "\n" +
+           "Sidor: " + pages + "\n" +
+           "Tillgänglig: " + isAvailable();
+}
 }
