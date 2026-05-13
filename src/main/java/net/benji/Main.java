@@ -23,9 +23,7 @@ public class Main {
                 case "3" -> libraryManager.listLibraryItems();
                 case "4" -> libraryManager.addBook();
                 case "5" -> libraryManager.addMagazine();
-                
-                case "6" -> {
-                }
+                case "6" ->  System.exit(0);
                 default -> IO.println("Något blev fel.");
             }
         }

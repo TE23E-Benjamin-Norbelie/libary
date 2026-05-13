@@ -14,117 +14,122 @@ import kong.unirest.core.Unirest;
 import kong.unirest.core.UnirestException;
 
 public class LibraryManager {
-        //private ArrayList<LibraryItem> libraryItems; // Lista för alla biblioteksaker
-        private ArrayList<Book> books; // Lista för böcker
-        private ArrayList<Magazine> magazines; // Lista för magasin
+    // private ArrayList<LibraryItem> libraryItems; // Lista för alla biblioteksaker
+    private ArrayList<Book> books; // Lista för böcker
+    private ArrayList<Magazine> magazines; // Lista för magasin
 
-        
-        private Gson gson = new Gson(); // Skapa en instans av Gson för JSON-hantering
+    private Gson gson = new Gson(); // Skapa en instans av Gson för JSON-hantering
 
-//serever url hantering
-private String serverUrl;
+    // serever url hantering
+    private String serverUrl;
 
-        public LibraryManager(String serverUrl) {
-                this.serverUrl = serverUrl; 
-                this.books = new ArrayList<>();// Initiera listan för böcker
-                this.magazines = new ArrayList<>();// Initiera listan för magasin
+    public LibraryManager(String serverUrl) {
+        this.serverUrl = serverUrl;
+        this.books = new ArrayList<>();// Initiera listan för böcker
+        this.magazines = new ArrayList<>();// Initiera listan för magasin
+    }
+
+    public void fetchBooks() {
+        HttpResponse<String> response;
+        try {
+            response = Unirest.get(serverUrl + "/books").asString();
+            String jsonBody = response.getBody();
+
+            // Konvertera JSON-strängen till en lista av Book-objekt
+            List<Book> fetchedBooks = gson.fromJson(jsonBody, new TypeToken<List<Book>>() {
+            }.getType());
+            books.addAll(fetchedBooks);
+            IO.println("Hämtat information om Böcker");
+
+        } catch (UnirestException e) {
+            IO.println("Något blev fel vid inläsning.");
         }
-        public void fetchBooks() {
-            HttpResponse<String> response;
-            try {
-                response = Unirest.get(serverUrl + "/books").asString();
-                String jsonBody = response.getBody();
+    }
 
-                // Konvertera JSON-strängen till en lista av Book-objekt
-                List<Book> fetchedBooks = gson.fromJson(jsonBody, new TypeToken<List<Book>>(){}.getType());
-                books.addAll(fetchedBooks);
-                IO.println("Hämtat information om Böcker");
+    public void fetchMagazines() {
+        HttpResponse<String> response;
+        try {
+            response = Unirest.get(serverUrl + "/magazines").asString();
+            String jsonBody = response.getBody();
 
-            } catch (UnirestException e) {
-                IO.println("Något blev fel vid inläsning.");
-            }
+            // Konvertera JSON-strängen till en lista av Magazine-objekt
+            List<Magazine> fetchedMagazines = gson.fromJson(jsonBody, new TypeToken<List<Magazine>>() {
+            }.getType());
+            magazines.addAll(fetchedMagazines);
+            IO.println("Hämtat information om Magazinen");
+
+        } catch (UnirestException e) {
+            IO.println("Något blev fel vid inläsning.");
+        }
+    }
+
+    public void listLibraryItems() {
+        IO.println("Bibliotekobjekt:");
+        for (Book book : books) {
+            IO.println(book.toString());
+        }
+        for (Magazine magazine : magazines) {
+            IO.println(magazine.toString());
         }
 
-        public void fetchMagazines() {
-            HttpResponse<String> response;
-            try {
-                response = Unirest.get(serverUrl + "/magazines").asString();
-                String jsonBody = response.getBody();
+    }
 
-                // Konvertera JSON-strängen till en lista av Magazine-objekt
-                List<Magazine> fetchedMagazines = gson.fromJson(jsonBody, new TypeToken<List<Magazine>>(){}.getType());
-                magazines.addAll(fetchedMagazines);
-                IO.println("Hämtat information om Magazinen");
+    public void addBook() {
+        IO.println("Lägger till en bok.");
 
-            } catch (UnirestException e) {
-                IO.println("Något blev fel vid inläsning.");
-            }
-        }
+        IO.println("Ange titel:");
+        String newBookTitle = IO.readln();
 
-        public void listLibraryItems() {
-            IO.println("Bibliotekobjekt:");
-            for (Book book: books) {
-                IO.println(book.toString());
-            }
-            for (Magazine magazine: magazines){
-                IO.println(magazine.toString());
-            }
-            
-        }
-        public void addBook() {
-            IO.println("Lägger till en bok.");
+        IO.println("Ange författare:");
+        String newBookAuthor = IO.readln();
 
-            IO.println("Ange titel:");
-            String newBookTitle = IO.readln();
+        IO.println("Ange genre:");
+        String newBookGenre = IO.readln();
 
-            IO.println("Ange författare:");
-            String newBookAuthor = IO.readln();
+        IO.println("Ange antal sidor:");
+        int newBookPages = Integer.parseInt(IO.readln());
 
-            IO.println("Ange genre:");
-            String newBookGenre = IO.readln();
+        String newBookId = String.valueOf(books.size() + 1);
 
-            IO.println("Ange antal sidor:");
-            int newBookPages = Integer.parseInt(IO.readln());
-            
-            String newBookId = String.valueOf(books.size()+ 1);
-
-            Book newBook = new Book(
-                newBookId, 
-                newBookTitle, 
+        Book newBook = new Book(
+                newBookId,
+                newBookTitle,
                 true,
-                newBookAuthor, 
-                newBookGenre, 
+                newBookAuthor,
+                newBookGenre,
                 newBookPages);
-            books.add(newBook);
-            IO.println("Bok tillagd.");
-        }
+        books.add(newBook);
+        IO.println("Bok tillagd.");
+    }
 
-        
-        public void addMagazine() {
-            IO.println("Lägger till ett magazine.");
+    public void addMagazine() {
+        IO.println("Lägger till ett magazine.");
 
-            IO.println("Ange titeln:");
-            String newMagazineTitle = IO.readln();
+        IO.println("Ange titeln:");
+        String newMagazineTitle = IO.readln();
 
-            IO.println("Ange utgåva: ");
-            int newIssuenumber = Integer.parseInt(IO.readln());
-            
-            IO.println("Ange kategori: ");
-            String newCatagory = IO.readln();
+        IO.println("Ange utgåva: ");
+        int newIssuenumber = Integer.parseInt(IO.readln());
 
-            IO.println("Ange publiceirings år: ");
-            int newPublicationYear = Integer.parseInt(IO.readln());
+        IO.println("Ange kategori: ");
+        String newCategory = IO.readln();
 
-            String newMagazineId = String.valueOf(magazines.size()+ 1);
+        IO.println("Ange publiceirings år: ");
+        int newPublicationYear = Integer.parseInt(IO.readln());
 
-            Magazine newMagazine = new Magazine(newMagazineTitle,
-                 newMagazineId,
-                  false,
-                   newIssuenumber, 
-                   newMagazineId, 
-                   newPublicationYear);
+        String newMagazineId = String.valueOf(magazines.size() + 1);
 
-            
-        }
+        Magazine newMagazine = new Magazine(
+                newMagazineTitle,
+                newMagazineId,
+                true,
+                newIssuenumber,
+                newCategory,
+                newMagazineId,
+                newPublicationYear);
+        magazines.add(newMagazine);
+        IO.println("Magazine tillagd.");
+
+    }
 
 }
