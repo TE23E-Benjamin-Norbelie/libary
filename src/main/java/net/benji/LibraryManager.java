@@ -71,11 +71,59 @@ private String serverUrl;
             }
             
         }
-        public void addBook(Book book) {
-            books.add(book);
+        public void addBook() {
+            IO.println("Lägger till en bok.");
+
+            IO.println("Ange titel:");
+            String newBookTitle = IO.readln();
+
+            IO.println("Ange författare:");
+            String newBookAuthor = IO.readln();
+
+            IO.println("Ange genre:");
+            String newBookGenre = IO.readln();
+
+            IO.println("Ange antal sidor:");
+            int newBookPages = Integer.parseInt(IO.readln());
+            
+            String newBookId = String.valueOf(books.size()+ 1);
+
+            Book newBook = new Book(
+                newBookId, 
+                newBookTitle, 
+                true,
+                newBookAuthor, 
+                newBookGenre, 
+                newBookPages);
+            books.add(newBook);
+            IO.println("Bok tillagd.");
         }
-        public void addMagazine(Magazine magazine) {
-            magazines.add(magazine);
+
+        
+        public void addMagazine() {
+            IO.println("Lägger till ett magazine.");
+
+            IO.println("Ange titeln:");
+            String newMagazineTitle = IO.readln();
+
+            IO.println("Ange utgåva: ");
+            int newIssuenumber = Integer.parseInt(IO.readln());
+            
+            IO.println("Ange kategori: ");
+            String newCatagory = IO.readln();
+
+            IO.println("Ange publiceirings år: ");
+            int newPublicationYear = Integer.parseInt(IO.readln());
+
+            String newMagazineId = String.valueOf(magazines.size()+ 1);
+
+            Magazine newMagazine = new Magazine(newMagazineTitle,
+                 newMagazineId,
+                  false,
+                   newIssuenumber, 
+                   newMagazineId, 
+                   newPublicationYear);
+
             
         }
 

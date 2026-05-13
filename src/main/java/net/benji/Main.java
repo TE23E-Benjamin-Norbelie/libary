@@ -21,10 +21,9 @@ public class Main {
                 case "1" -> libraryManager.fetchBooks();
                 case "2" -> libraryManager.fetchMagazines();
                 case "3" -> libraryManager.listLibraryItems();
-                case "4" -> {
-                }
-                case "5" -> {
-                }
+                case "4" -> libraryManager.addBook();
+                case "5" -> libraryManager.addMagazine();
+                
                 case "6" -> {
                 }
                 default -> IO.println("Något blev fel.");

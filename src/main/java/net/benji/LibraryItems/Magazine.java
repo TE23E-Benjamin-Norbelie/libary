@@ -20,10 +20,13 @@ public class Magazine extends LibraryItem {
         this.publicationYear = publicationYear;
     }
 
+    @Override
     public String toString() {
-        return "Titel: " + getTitle() + ", Nummer: " + issueNumber + ", Kategori: " + category + ", År: "
-                + publicationYear +
-                ", Tillgänglig: " + isAvailable();
+        return "Titel: " + getTitle() + "\n" +
+               "Nummer: " + issueNumber + "\n" +
+               "Kategori: " + category + "\n" +
+               "År: " + publicationYear + "\n" +
+               "Tillgänglig: " + isAvailable() + "\n";
     }
 
 }

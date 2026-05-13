@@ -1,9 +1,11 @@
 package net.benji.LibraryItems;
+
 import net.benji.LibraryItem;
+
 /**
- * Klass som extenderar LibraryItem, som är en superklass, 
+ * Klass som extenderar LibraryItem, som är en superklass,
  * och därmed ärver dess egenskaper och metoder.
- *  Denna klass kan användas för att representera böcker i bibliotekssystemet.
+ * Denna klass kan användas för att representera böcker i bibliotekssystemet.
  */
 public class Book extends LibraryItem {
     private String author;
@@ -17,12 +19,13 @@ public class Book extends LibraryItem {
         this.pages = pages;
     }
 
-@Override
-public String toString() {
-    return "Titel: " + getTitle() + "\n" +
-           "Författare: " + author + "\n" +
-           "Genre: " + genre + "\n" +
-           "Sidor: " + pages + "\n" +
-           "Tillgänglig: " + isAvailable();
-}
+    @Override
+    public String toString() {
+        return "Titel: " + getTitle() + "\n" +
+                "Författare: " + author + "\n" +
+                "Genre: " + genre + "\n" +
+                "Sidor: " + pages + "\n" +
+                "Tillgänglig: " + isAvailable()+ "\n";
+
+    }
 }
