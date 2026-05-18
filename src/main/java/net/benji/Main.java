@@ -1,8 +1,10 @@
 package net.benji;
-
+// meny för biblotekssystem som kopplar till en lokal server på port 3000
+//  som anropar metoder via libraryManager
 public class Main {
     public static void main(String[] args) {
 
+//skapar en bibliotekshanterare som är kopplad till en lokal server på port 3000.
         LibraryManager libraryManager = new LibraryManager("http://localhost:3000");
         while (true) {
 
@@ -23,7 +25,7 @@ public class Main {
                 case "3" -> libraryManager.listLibraryItems();
                 case "4" -> libraryManager.addBook();
                 case "5" -> libraryManager.addMagazine();
-                case "6" ->  System.exit(0);
+                case "6" ->  System.exit(0); // alternativ 6 i menyn - stäng av
                 default -> IO.println("Något blev fel.");
             }
         }

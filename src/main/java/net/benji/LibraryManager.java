@@ -13,6 +13,10 @@ import kong.unirest.core.HttpResponse;
 import kong.unirest.core.Unirest;
 import kong.unirest.core.UnirestException;
 
+// LibraryManager hanterar ett bibliotekssystem som lagrar och organiserar böcker och magasin.
+// Klassen kan hämta data från en server via API-anrop, lista bibliotekets innehåll samt låta
+// användaren lägga till nya böcker och magasin lokalt i programmet.
+
 public class LibraryManager {
     // private ArrayList<LibraryItem> libraryItems; // Lista för alla biblioteksaker
     private ArrayList<Book> books; // Lista för böcker
@@ -29,11 +33,14 @@ public class LibraryManager {
         this.magazines = new ArrayList<>();// Initiera listan för magasin
     }
 
+// Alternativ 1 i menyn
+
     public void fetchBooks() {
         HttpResponse<String> response;
         try {
-            response = Unirest.get(serverUrl + "/books").asString();
+            response = Unirest.get(serverUrl + "/books").asString(); //fråga till servern
             String jsonBody = response.getBody();
+
 
             // Konvertera JSON-strängen till en lista av Book-objekt
             List<Book> fetchedBooks = gson.fromJson(jsonBody, new TypeToken<List<Book>>() {
@@ -43,8 +50,10 @@ public class LibraryManager {
 
         } catch (UnirestException e) {
             IO.println("Något blev fel vid inläsning.");
-        }
+        }   
     }
+
+    // Alternativ 2 i menyn (typ som 1)
 
     public void fetchMagazines() {
         HttpResponse<String> response;
@@ -63,6 +72,8 @@ public class LibraryManager {
         }
     }
 
+    // Alternativ 3 i menyn
+
     public void listLibraryItems() {
         IO.println("Bibliotekobjekt:");
         for (Book book : books) {
@@ -73,6 +84,8 @@ public class LibraryManager {
         }
 
     }
+
+    // Alternativ 4 i menyn
 
     public void addBook() {
         IO.println("Lägger till en bok.");
@@ -101,6 +114,8 @@ public class LibraryManager {
         books.add(newBook);
         IO.println("Bok tillagd.");
     }
+
+    // Alternativ 5 i menyn
 
     public void addMagazine() {
         IO.println("Lägger till ett magazine.");
